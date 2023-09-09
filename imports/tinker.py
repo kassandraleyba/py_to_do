@@ -12,6 +12,19 @@ def add_task():
   else:
     tkinter.messagebox.showwarning(title="Warning", message="You must enter a task")
 
+def delete_task():
+  try:
+    task_index = listbox_tasks.curselection()[0]
+    listbox_tasks.delete(task_index)
+  except:
+    tkinter.messagebox.showwarning(title="Warning", message="You must select a task")
+
+def load_tasks():
+  pass
+
+def save_tasks():
+  pass
+
 #Create GUI
 frame_tasks = tkinter.Frame(root)
 frame_tasks.pack()
@@ -30,5 +43,14 @@ entry_task.pack()
 
 button_add_task = tkinter.Button(root, text="Add task", width=48, command=add_task)
 button_add_task.pack()
+
+button_delete_task = tkinter.Button(root, text="Delete task", width=48, command=delete_task)
+button_delete_task.pack()
+
+button_load_tasks = tkinter.Button(root, text="Load task", width=48, command=load_tasks)
+button_load_tasks.pack()
+
+button_save_tasks = tkinter.Button(root, text="Save task", width=48, command=save_tasks)
+button_save_tasks.pack()
 
 root.mainloop()
