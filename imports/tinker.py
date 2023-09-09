@@ -1,5 +1,6 @@
 import tkinter
 import tkinter .messagebox
+import pickle
 
 root = tkinter.Tk()
 root.title("To-Do List")
@@ -20,10 +21,21 @@ def delete_task():
     tkinter.messagebox.showwarning(title="Warning", message="You must select a task")
 
 def load_tasks():
-  pass
+  try:
+    tasks = pickle.load(open("tasks.dat", "rb"))
+    # rb = reading binary
+    listbox_tasks.delete(0, tkinter.END)
+    for task in tasks:
+      listbox_tasks.insert(tkinter.END, task)
+  except:
+     tkinter.messagebox.showwarning(title="Warning", message="Cannot find tasks.dat")
 
 def save_tasks():
-  pass
+  tasks = listbox_tasks.get(0, listbox_tasks.size())
+  print(tasks)
+  pickle.dump(tasks, open("tasks.dat", "wb"))
+  # pickle module - save tasks to data file
+  # wb = write binary
 
 #Create GUI
 frame_tasks = tkinter.Frame(root)
@@ -47,10 +59,10 @@ button_add_task.pack()
 button_delete_task = tkinter.Button(root, text="Delete task", width=48, command=delete_task)
 button_delete_task.pack()
 
-button_load_tasks = tkinter.Button(root, text="Load task", width=48, command=load_tasks)
+button_load_tasks = tkinter.Button(root, text="Load tasks", width=48, command=load_tasks)
 button_load_tasks.pack()
 
-button_save_tasks = tkinter.Button(root, text="Save task", width=48, command=save_tasks)
+button_save_tasks = tkinter.Button(root, text="Save tasks", width=48, command=save_tasks)
 button_save_tasks.pack()
 
 root.mainloop()
