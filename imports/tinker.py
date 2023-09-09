@@ -13,8 +13,17 @@ def add_task():
     tkinter.messagebox.showwarning(title="Warning", message="You must enter a task")
 
 #Create GUI
-listbox_tasks = tkinter.Listbox(root, height=3, width=50)
-listbox_tasks.pack()
+frame_tasks = tkinter.Frame(root)
+frame_tasks.pack()
+
+listbox_tasks = tkinter.Listbox(frame_tasks, height=10, width=50)
+listbox_tasks.pack(side=tkinter.LEFT)
+
+scrollbar_tasks = tkinter.Scrollbar(frame_tasks)
+scrollbar_tasks.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+
+listbox_tasks.config(yscrollcommand=scrollbar_tasks.set)
+scrollbar_tasks.config(command=listbox_tasks.yview)
 
 entry_task = tkinter.Entry(root, width=50)
 entry_task.pack()
