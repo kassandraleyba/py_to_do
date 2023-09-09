@@ -6,7 +6,11 @@ root.title("To-Do List")
 
 def add_task():
   task = entry_task.get()
-  listbox_tasks.insert(tkinter.END, task)
+  if task != "":
+    listbox_tasks.insert(tkinter.END, task)
+    entry_task.delete(0, tkinter.END)
+  else:
+    tkinter.messagebox.showwarning(title="Warning", message="You must enter a task")
 
 #Create GUI
 listbox_tasks = tkinter.Listbox(root, height=3, width=50)
